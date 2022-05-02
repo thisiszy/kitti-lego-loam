@@ -324,6 +324,7 @@ int main(int argc, char** argv)
     ros::NodeHandle nh;
 
     nh.getParam("RESULT_PATH", RESULT_PATH);
+	std::ofstream foutC(RESULT_PATH, std::ios::trunc);
 
     TransformFusion TFusion;
 
