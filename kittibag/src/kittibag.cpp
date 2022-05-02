@@ -22,6 +22,7 @@
 #include <pcl_conversions/pcl_conversions.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <chrono>
+#include <thread>
 
 std::vector<float> read_lidar_data(const std::string lidar_data_path)
 {
