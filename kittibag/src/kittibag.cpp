@@ -21,6 +21,7 @@
 #include <pcl/point_types.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <chrono>
 
 std::vector<float> read_lidar_data(const std::string lidar_data_path)
 {
@@ -82,7 +83,6 @@ int main(int argc, char** argv)
     std::string line;
     std::size_t line_num = 0;
 
-    ros::Rate r(10.0 / publish_delay);
     while (std::getline(timestamp_file, line) && ros::ok())
     {
         float timestamp = stof(line);
@@ -171,7 +171,8 @@ int main(int argc, char** argv)
         }
 
         line_num ++;
-        r.sleep();
+        std::chrono::milliseconds dura(100);
+        std::this_thread::sleep_for(dura);
     }
     bag_out.close();
     std::cout << "Done \n";

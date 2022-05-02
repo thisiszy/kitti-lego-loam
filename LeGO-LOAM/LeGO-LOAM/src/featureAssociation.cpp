@@ -1858,14 +1858,14 @@ int main(int argc, char** argv)
 
     FeatureAssociation FA;
 
-    ros::Rate rate(200);
     while (ros::ok())
     {
         ros::spinOnce();
 
         FA.runFeatureAssociation();
 
-        rate.sleep();
+        std::chrono::milliseconds dura(5);
+        std::this_thread::sleep_for(dura);
     }
     
     ros::spin();

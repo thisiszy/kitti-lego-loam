@@ -696,9 +696,9 @@ public:
     }
 
     void visualizeGlobalMapThread(){
-        ros::Rate rate(0.2);
         while (ros::ok()){
-            rate.sleep();
+            std::chrono::seconds dura(5);
+            std::this_thread::sleep_for(dura);
             publishGlobalMap();
         }
         // save final point cloud
@@ -778,9 +778,9 @@ public:
         if (loopClosureEnableFlag == false)
             return;
 
-        ros::Rate rate(1);
         while (ros::ok()){
-            rate.sleep();
+            std::chrono::seconds dura(1);
+            std::this_thread::sleep_for(dura);
             performLoopClosure();
         }
     }
@@ -1508,14 +1508,14 @@ int main(int argc, char** argv)
     std::thread loopthread(&mapOptimization::loopClosureThread, &MO);
     std::thread visualizeMapThread(&mapOptimization::visualizeGlobalMapThread, &MO);
 
-    ros::Rate rate(200);
     while (ros::ok())
     {
         ros::spinOnce();
 
         MO.run();
 
-        rate.sleep();
+        std::chrono::milliseconds dura(5);
+        std::this_thread::sleep_for(dura);
     }
 
     loopthread.join();
