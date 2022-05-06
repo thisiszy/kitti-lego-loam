@@ -1832,6 +1832,7 @@ public:
         */
         if (!systemInitedLM) {
             checkSystemInitialization();
+            publishOdometry();
             return;
         }
 
